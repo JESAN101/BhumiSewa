@@ -1,0 +1,41 @@
+[1mdiff --git a/backend/config/settings.py b/backend/config/settings.py[m
+[1mindex 0d31879..c227d58 100644[m
+[1m--- a/backend/config/settings.py[m
+[1m+++ b/backend/config/settings.py[m
+[36m@@ -11,9 +11,12 @@[m [mhttps://docs.djangoproject.com/en/6.1/ref/settings/[m
+ """[m
+ [m
+ from pathlib import Path[m
+[32m+[m[32mfrom dotenv import load_dotenv[m
+[32m+[m[32mimport os[m
+ [m
+ # Build paths inside the project like this: BASE_DIR / 'subdir'.[m
+ BASE_DIR = Path(__file__).resolve().parent.parent[m
+[32m+[m[32mload_dotenv(BASE_DIR / ".env")[m
+ [m
+ [m
+ # Quick-start development settings - unsuitable for production[m
+[36m@@ -73,9 +76,13 @@[m [mWSGI_APPLICATION = 'config.wsgi.application'[m
+ # https://docs.djangoproject.com/en/6.1/ref/settings/#databases[m
+ [m
+ DATABASES = {[m
+[31m-    'default': {[m
+[31m-        'ENGINE': 'django.db.backends.sqlite3',[m
+[31m-        'NAME': BASE_DIR / 'db.sqlite3',[m
+[32m+[m[32m    "default": {[m
+[32m+[m[32m        "ENGINE": "django.contrib.gis.db.backends.postgis",[m
+[32m+[m[32m        "NAME": os.getenv("POSTGRES_DB"),[m
+[32m+[m[32m        "USER": os.getenv("POSTGRES_USER"),[m
+[32m+[m[32m        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),[m
+[32m+[m[32m        "HOST": os.getenv("POSTGRES_HOST"),[m
+[32m+[m[32m        "PORT": os.getenv("POSTGRES_PORT"),[m
+     }[m
+ }[m
+ [m
+[36m@@ -125,3 +132,6 @@[m [mMAILERS = {[m
+         'BACKEND': 'django.core.mail.backends.console.EmailBackend',[m
+     },[m
+ }[m
+[32m+[m
+[32m+[m[32mGDAL_LIBRARY_PATH = r"C:\Users\jeson\AppData\Local\Programs\OSGeo4W\bin\gdal313.dll"[m
+[32m+[m[32mGEOS_LIBRARY_PATH = r"C:\Users\jeson\AppData\Local\Programs\OSGeo4W\bin\geos_c.dll"[m
